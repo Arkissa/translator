@@ -63,6 +63,7 @@ def http(
             raise requests.Timeout
 
         t = handle(response)
+        print(t)
     except Exception:
         pass
 
@@ -74,10 +75,10 @@ def check_lang(text: str) -> str:
 async def google(text: str, proxy: dict[str, str] = {}) -> Dict[str, str] | str:
     body = {
         "method": "get",
-        "url": URL["google"].format(check_lang(text), quote_plus(text)),
+        "url": URL["google"].format(check_lang(text), quote_plus(text.replace("\n", "+"))),
         "headers": HEADERS,
         "timeout": TIMEOUT,
-        "proxies":proxy,
+        "proxies": proxy,
     }
 
     return http(google_fanyi, body)
@@ -85,7 +86,11 @@ async def google(text: str, proxy: dict[str, str] = {}) -> Dict[str, str] | str:
 def google_fanyi(fanyi: requests.Response) -> Dict[str, str] | str:
     text = fanyi.json()
 
-    return  text[0][0] and {"<b>󰭻 Google</b>\n": text[0][0][0] + "\n"} or ""
+    return  {
+        "<b>󰭻 Google</b>\n": "".join(
+                filter(lambda x: x is not None, [i[0] for i in text[0] if isinstance(i, list)])
+            )
+        } if text[0][0] else ""
 
 
 async def haici(text: str, proxy: dict[str, str] = {}) -> Dict[str, str] | str:
@@ -106,7 +111,7 @@ def haici_fanyi(fanyi: requests.Response) -> Dict[str, str] | str:
     haici = haici if isinstance(haici, list) else []
 
     return  {
-        "<b>󰭻 Haici</b>\n": "\n".join([i for i in haici if isinstance(i, str)]) + "\n"
+        "<b>󰭻 Haici</b>\n": "\n".join([i for i in haici if isinstance(i, str)])
     } if haici else ""
 
 async def youdao(text: str, proxy: dict[str, str] = {}) -> Dict[str, str] | str:
@@ -185,8 +190,7 @@ async def main(left: Callable[[], bytes | int], proxy: str):
             haici(text, handle_proxy(proxy)),
             baidu(text, handle_proxy(proxy)),
         )
-        print(results)
-        
+
         answer = [
             "".join(
                 [k + v for k, v in i.items() if isinstance(k, str) and isinstance(v, str)]
