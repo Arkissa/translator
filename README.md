@@ -2,6 +2,11 @@
 
 ## 注意事项
 
+**安装** 
+```shell
+$ git clone https://github.com/New-arkssac/x11-translate.git
+```
+
 复制需要以来xclip, 使用包管理器装一下  
 **arch**  
 ```shell
