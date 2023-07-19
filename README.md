@@ -27,3 +27,14 @@ $ sudo usermod -a -G input $USER
 ```shell
 $ pip install -r requiements.txt 
 ```
+
+**用法** 
+```shell
+$ ./translate.py
+```
+然后用鼠标选中自己想翻译的文本即可  
+
+**设置代理** 
+```shell
+$ ./translate.py http://your-proxy:port
+```
