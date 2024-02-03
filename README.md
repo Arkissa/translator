@@ -4,7 +4,7 @@
 
 **安装** 
 ```shell
-$ git clone https://github.com/New-arkssac/x11-translate.git
+$ git clone https://github.com/New-arkssac/translator.git
 $ pip install -r requiements.txt 
 ```
 
