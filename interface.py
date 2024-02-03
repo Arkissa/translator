@@ -34,6 +34,7 @@ class Clipboarder(Protocol):
     def close(self) -> None:
         pass
 
+
 class Comparable(Protocol):
     @abstractmethod
     def __eq__(self, __value) -> bool:

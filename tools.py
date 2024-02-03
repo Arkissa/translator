@@ -3,7 +3,6 @@ from importlib import import_module
 import json
 from platform import system
 from typing import Dict, Callable, List, TypeVar, Union
-
 from interface import Notifyer, Ord, Clipboarder, Mouser
 
 _SYSTEM = system()
@@ -77,5 +76,3 @@ class Display:
 
     def Do(self, xs: List[Dict[str, str]] | str) -> None:
         self.__do(xs)
-
-

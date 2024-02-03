@@ -46,4 +46,3 @@ class Translate:
 
     async def Do(self, text: str) -> List[Dict[str, str]]:
         return [] if text == '' else await gather(*map(lambda f: f(text), self.__modules))
-

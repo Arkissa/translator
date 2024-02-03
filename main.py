@@ -4,7 +4,6 @@ import asyncio
 from translate import Translate
 from tools import Display
 
-
 def main(args: argparse.Namespace):
     display = Display(args.display)
 
@@ -39,9 +38,6 @@ def main(args: argparse.Namespace):
             display.Do(await Translate(args.proxy).Do(args.text))
 
         asyncio.run(run())
-
-
-
 
 if __name__ == "__main__":
     parse = argparse.ArgumentParser(description="Translate between English and Chinese.",
