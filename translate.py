@@ -41,7 +41,7 @@ class Translate:
                              (Map(loadMod) \
                              (Map(dropPy) \
                              (Filter(isPyFile) \
-                             (listdir("translate")))))))))
+                             (listdir("translator")))))))))
 
 
     async def Do(self, text: str) -> List[Dict[str, str]]:
